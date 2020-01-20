@@ -1,29 +1,62 @@
+<!--
+ * @Description: 患者信息列表
+ * @Author: Benny
+ * @Date: 2020-01-20 11:08:51
+ * @LastEditTime : 2020-01-20 17:22:48
+ -->
 <template>
-    <div class="plist">
-      所负责病人列表
+    <div>
+        <div class="btn-group">
+            <el-button size="small" type="primary">全部</el-button>
+            <el-button size="small">我负责的</el-button>
+        </div>
+        <el-table :data="tableData"  style="width:60%" stripe >
+            <el-table-column prop="userName" label="用户名" align="center">
+            </el-table-column>
+            <el-table-column prop="gender" label="用户性别" width="100" align="center">
+            </el-table-column>
+            <el-table-column prop="office" label="科室" align="center">
+            </el-table-column>
+            <el-table-column prop="age" label="年龄" width="100" align="center">
+            </el-table-column>
+            <el-table-column prop="mobile" label="手机号" align="center">
+            </el-table-column>
+        </el-table>
     </div>
+
 </template>
-
-<style lang="sass" scoped>
-    @import './index.scss';
+<style scoped>
+    .btn-group{
+        margin: 20px 0;
+    }
 </style>
-
 <script>
-
-
 export default {
-    name: 'Plist',
+    name: 'List',
     data() {
         return {
+            tableData: [{
+                userName: '王小虎',
+                gender:'男',
+                age:40,
+                office: '内科',
+                mobile:'13242270901',
+            },
+           {
+                userName: '王小虎',
+                gender:'男',
+                age:50,
+                office: '儿科',
+                mobile:'13242270901',
+            },
+            ]
 
-        };
+        }
     },
+    methods:{
 
-    methods: {
+    }
+}
 
-    },
-    mounted() {
 
-    },
-};
 </script>

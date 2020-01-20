@@ -155,12 +155,6 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: 'add',
-        component: () => import('@/views/patient/case/add/index'), // Parent router-view
-        name: 'list',
-        meta: { title: '病历录入' }
-      },
-      {
         path: 'list',
         component: () => import('@/views/patient/case/list/index'),
         meta: { title: '病历汇总' }
@@ -186,44 +180,48 @@ export const asyncRoutes = [
       {
         path: 'list',
         component: () => import('@/views/patient/appoint/list/index'),
-        meta: { title: '挂号订单', roles: ['admin', 'patient', 'doctor'] }
-      }
-    ]
-  },
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: '病人信息管理',
-      icon: 'form'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: '病人信息录入', roles: ['admin', 'doctor'] }
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: '病人信息列表', roles: ['patient', 'admin', 'doctor'] }
+        meta: { title: '看诊记录', roles: ['admin', 'patient', 'doctor'] }
       }
     ]
   },
 
   {
-    path: '/form',
+    path: '/doctor',
     component: Layout,
+    redirect: '/doctor/plist',
+    name: 'doctor',
+    meta: {
+      title: '医生信息管理',
+      icon: 'form',
+      roles: ['admin', 'doctor']
+    },
     children: [
       {
-        path: 'index',
+        path: 'cureList',
+        component: () => import('@/views/doctor/curelist/index'), // Parent router-view
+        name: 'cure',
+        meta: { title: '待看诊列表' }
+      },
+      {
+        path: 'add',
+        component: () => import('@/views/doctor/add/index'), // Parent router-view
+        name: 'add',
+        meta: { title: '看诊' },
+        hidden: true
+      },
+      {
+        path: 'dlist',
         name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: '医生信息管理', icon: 'form', roles: ['admin', 'doctor'] }
-      }
+        component: () => import('@/views/doctor/dlist'),
+        meta: { title: '医生信息列表' }
+      },
+      {
+        path: 'plist',
+        name: 'Form',
+        component: () => import('@/views/doctor/plist'),
+        meta: { title: '患者信息列表'}
+      },
+      
     ]
   },
   {

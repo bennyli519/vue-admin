@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-01-11 02:12:10
- * @LastEditTime : 2020-01-19 23:07:49
- * @LastEditors  : Benny
+ * @LastEditTime : 2020-01-21 13:56:02
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-admin-template\src\permission.js
  */
@@ -16,7 +16,7 @@ import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['/login'] // no redirect whitelist
+const whiteList = ['/login','/add'] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar

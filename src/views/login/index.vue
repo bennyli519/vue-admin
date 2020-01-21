@@ -44,8 +44,8 @@
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
+        <router-link to="/add">SignUp</router-link>
+
       </div>
 
     </el-form>
@@ -189,6 +189,7 @@ $light_gray:#eee;
   }
 
   .tips {
+    text-align: right;
     font-size: 14px;
     color: #fff;
     margin-bottom: 10px;

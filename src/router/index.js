@@ -36,7 +36,11 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
-
+  {
+    path: '/add',
+    component: () => import('@/views/other/account/add/index'), // Parent router-view
+    meta: { title: '账号添加' }
+  },
   {
     path: '/404',
     component: () => import('@/views/404'),
@@ -146,7 +150,7 @@ export const asyncRoutes = [
   {
     path: '/case',
     component: Layout,
-    redirect: '/case/add',
+    redirect: '/case/list',
     name: 'case',
     meta: {
       title: '病案管理',

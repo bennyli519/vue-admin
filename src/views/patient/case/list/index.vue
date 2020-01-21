@@ -2,11 +2,13 @@
  * @Author: Benny
  * @Date: 2020-01-11 14:34:46
  * @LastEditors  : Please set LastEditors
- * @LastEditTime : 2020-01-21 11:30:14
+ * @LastEditTime : 2020-01-21 14:00:13
  -->
 <template>
     <el-table :data="tableData"  style="width:80%" stripe >
         <el-table-column prop="caseId" label="编号" align="center">
+        </el-table-column>
+        <el-table-column prop="caseDate" label="日期" align="center">
         </el-table-column>
         <el-table-column prop="patientName" label="患者名称" align="center">
         </el-table-column>
@@ -24,8 +26,7 @@
         </el-table-column>
          <el-table-column prop="caseCure" label="处方" align="center">
         </el-table-column>
-        <el-table-column prop="caseDate" label="日期" align="center">
-        </el-table-column>
+     
     </el-table>
 
 </template>
@@ -38,20 +39,29 @@ export default {
     data() {
         return {
             tableData: [{
-                userName: '王小虎',
-                userTypeName: '管理员',
+                caseId: '104787',
+                caseDate: '2020-1-20',
+                patientName:'李二傻',
+                office:'儿科',
                 gender:'男',
-                age:20,
-                mobile:'13242270901'
+                age: 20,
+                caseContent: '头痛肚子痛',
+                caseConclude:'阑尾炎',
+                caseSuggest:'多喝热水，少吃辣辛刺激的食物，清淡饮食',
+                caseCure:'止痛片x5,消炎片x10',
             },
-            {
-                userId: '10088',
-                userName: '王小asdfsdaf虎',
-                userTypeName: '管理员',
+           {
+                caseId: '104787',
+                caseDate: '2020-1-20',
+                patientName:'李二傻',
+                office:'儿科',
                 gender:'男',
-                age:20,
-                mobile:'13242270901'
-            },
+                age: 20,
+                caseContent: '头痛肚子痛',
+                caseConclude:'阑尾炎',
+                caseSuggest:'多喝热水，少吃辣辛刺激的食物，清淡饮食',
+                caseCure:'止痛片x5,消炎片x10',
+            },,
             ]
 
         }

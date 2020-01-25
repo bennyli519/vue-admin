@@ -29,6 +29,7 @@
 </style>
 
 <script>
+import { getList } from '@/api/offices'
 export default {
     name: 'List',
     data() {
@@ -52,6 +53,11 @@ export default {
             ]
 
         }
+    },
+    created(){
+        getList().then(res=>{
+            console.log(res)
+        })
     },
     methods:{
 

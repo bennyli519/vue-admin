@@ -20,6 +20,7 @@
 </style>
 
 <script>
+import { createOffice } from '@/api/offices'
 export default {
     name: 'Add',
     data() {
@@ -39,8 +40,17 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate(valid => {
                 if (valid) {
-                    console.log(this.ruleForm)
-                    alert("submit!");
+                    createOffice({
+                        oName:this.ruleForm.name
+                    }).then(res=>{
+                        if(res.status){
+                            this.$message.success('添加科室成功')
+                        }else{
+                            this.$message.error('添加科室失败')
+                        }
+                        console.log(res)
+                    })
+                
                 } else {
                     console.log("error submit!!");
                     return false;

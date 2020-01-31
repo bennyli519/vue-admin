@@ -2,7 +2,7 @@
  * @Author: Benny
  * @Date: 2020-01-11 14:34:37
  * @LastEditors  : Benny
- * @LastEditTime : 2020-01-20 01:07:39
+ * @LastEditTime : 2020-01-31 10:57:58
  -->
 <template>
   <el-form
@@ -16,16 +16,15 @@
       <el-input v-model="ruleForm.name" placeholder="请输入用户名"></el-input>
     </el-form-item>
     <el-form-item label="用户类型" prop="usertype">
-      <el-select v-model="ruleForm.usertype" placeholder="请选择用户类型">
+      <el-select v-model="ruleForm.usertype" placeholder="请选择用户类型" @change="selectRole">
         <el-option label="患者" value="1"></el-option>
         <el-option label="医生" value="2"></el-option>
         <el-option label="管理员" value="3"></el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="科室" prop="usertype">
+    <el-form-item v-if="isDoctor" label="科室" prop="usertype">
       <el-select v-model="ruleForm.office" placeholder="请选择科室">
-        <el-option label="儿科" value="1"></el-option>
-        <el-option label="妇产科" value="2"></el-option>
+        <el-option v-for="item,index in officeList" :key="index" :label="item.o_name" :value="item.office_id"></el-option>
       </el-select>
     </el-form-item>
     <el-form-item label="性别" prop="gender">
@@ -49,7 +48,7 @@
       ></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm('ruleForm')">立即添加</el-button>
+      <el-button :loading="isLoading" type="primary" @click="submitForm('ruleForm')">立即添加</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -60,7 +59,7 @@
 
 <script>
 import { register } from '@/api/user'
-
+import { getList } from '@/api/offices'
 export default {
   name: "Add",
 
@@ -100,7 +99,11 @@ export default {
         callback();
       }
     };
+
     return {
+      officeList:[],
+      isDoctor:false,
+      isLoading:false,
       ruleForm: {
         name: "",
         usertype: "",
@@ -124,19 +127,39 @@ export default {
       }
     };
   },
-
+  created() {
+    //获取科室列表
+    getList().then(res=>{
+      if(res.status)
+          this.officeList = res.data
+      else
+          this.$message.error(res.msg || '获取科室列表失败')
+    })
+  },
   methods: {
+    //选择角色
+    selectRole(val){
+      //如果是医生则显示科室
+      this.isDoctor = val==2
+    },
+    //注册
     register() {
+      this.isLoading = true;
       register({ username: this.ruleForm.name,userType:this.ruleForm.usertype, password: this.ruleForm.pass })
-        .then(response => {
-          
-          console.log(response);
-          
+        .then(res => {
+          this.isLoading = false;
+          if(res.status){
+            this.ruleForm ={}
+            this.$message.success(res.data)
+          }
+          else
+            this.$message.error('创建失败')
         })
         .catch(error => {
           console.log(error)
         });
     },
+    //提交表单
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {

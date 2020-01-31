@@ -1,8 +1,8 @@
 <!--
  * @Author: Benny
  * @Date: 2020-01-11 14:36:02
- * @LastEditors: Benny
- * @LastEditTime: 2020-01-20 00:02:51
+ * @LastEditors  : Benny
+ * @LastEditTime : 2020-01-31 10:44:04
  -->
 <template>
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -44,13 +44,14 @@ export default {
                         oName:this.ruleForm.name
                     }).then(res=>{
                         if(res.status){
+                            this.ruleForm.name = '';
                             this.$message.success('添加科室成功')
                         }else{
                             this.$message.error('添加科室失败')
                         }
                         console.log(res)
                     })
-                
+
                 } else {
                     console.log("error submit!!");
                     return false;

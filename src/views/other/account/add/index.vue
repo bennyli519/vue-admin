@@ -1,8 +1,8 @@
 <!--
  * @Author: Benny
  * @Date: 2020-01-11 14:34:37
- * @LastEditors  : Benny
- * @LastEditTime : 2020-01-31 10:57:58
+ * @LastEditors  : Please set LastEditors
+ * @LastEditTime : 2020-01-31 16:18:43
  -->
 <template>
   <el-form
@@ -35,6 +35,9 @@
     </el-form-item>
     <el-form-item label="年龄" prop="age">
       <el-input v-model.number="ruleForm.age" placeholder="请输入你的年龄"></el-input>
+    </el-form-item>
+    <el-form-item label="手机号" prop="mobile">
+      <el-input v-model.number="ruleForm.mobile" placeholder="请输入你的手机号" maxlength="11"></el-input>
     </el-form-item>
     <el-form-item label="密码" prop="pass">
       <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="请输入密码"></el-input>
@@ -99,6 +102,13 @@ export default {
         callback();
       }
     };
+    var validateMobile = (rule,value,callback) =>{
+      if(!(/^1[3456789]\d{9}$/.test(value))){
+        callback(new Error('手机号格式有误'))
+      }else{
+        callback();
+      }
+    }
 
     return {
       officeList:[],
@@ -111,7 +121,8 @@ export default {
         pass: "",
         checkPass: "",
         age: "",
-        office: ""
+        office: "",
+        mobile:"",
       },
       rules: {
         name: [{ required: true, message: "请输入用户名", trigger: "blur" }],
@@ -123,7 +134,10 @@ export default {
         checkPass: [
           { required: true, validator: validatePass2, trigger: "blur" }
         ],
-        age: [{ validator: checkAge, trigger: "blur" }]
+        age: [{ validator: checkAge, trigger: "blur" }],
+        mobile:[{
+          required: true, validator: validateMobile,trigger:"blur"
+        }]
       }
     };
   },
@@ -145,7 +159,7 @@ export default {
     //注册
     register() {
       this.isLoading = true;
-      register({ username: this.ruleForm.name,userType:this.ruleForm.usertype, password: this.ruleForm.pass })
+      register(this.ruleForm)
         .then(res => {
           this.isLoading = false;
           if(res.status){

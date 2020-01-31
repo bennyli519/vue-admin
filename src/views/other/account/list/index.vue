@@ -1,8 +1,9 @@
 <!--
  * @Author: Benny
  * @Date: 2020-01-11 14:34:46
- * @LastEditors  : Benny
- * @LastEditTime : 2020-01-19 23:57:45
+ * @LastEditors  : Please set LastEditors
+ * @LastEditTime : 2020-01-31 17:36:34
+ * @description:账号列表
  -->
 <template>
 
@@ -14,12 +15,12 @@
         </el-table-column>
         <el-table-column prop="userTypeName" label="用户类型" align="center">
         </el-table-column>
-        <el-table-column prop="gender" label="用户性别" width="100" align="center">
+        <!-- <el-table-column prop="gender" label="用户性别" width="100" align="center">
         </el-table-column>
         <el-table-column prop="age" label="年龄" width="100" align="center">
         </el-table-column>
         <el-table-column prop="mobile" label="手机号" align="center">
-        </el-table-column>
+        </el-table-column> -->
     </el-table>
 
 </template>
@@ -29,35 +30,21 @@
 </style>
 
 <script>
-import { getList } from '@/api/offices'
+import { getInfoList } from '@/api/user'
 export default {
     name: 'List',
     data() {
         return {
-            tableData: [{
-                userId: '10086',
-                userName: '王小虎',
-                userTypeName: '管理员',
-                gender:'男',
-                age:20,
-                mobile:'13242270901'
-            },
-            {
-                userId: '10088',
-                userName: '王小asdfsdaf虎',
-                userTypeName: '管理员',
-                gender:'男',
-                age:20,
-                mobile:'13242270901'
-            },
-            ]
+            tableData: []
 
         }
     },
     created(){
-        getList().then(res=>{
-            console.log(res)
-        })
+       getInfoList().then(res=>{
+           if(res.status)
+            this.tableData = res.data
+           console.log(res)
+       })
     },
     methods:{
 

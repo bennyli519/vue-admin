@@ -2,7 +2,7 @@
  * @Description: 看诊记录
  * @Author: Benny
  * @Date: 2020-01-20 11:08:51
- * @LastEditTime : 2020-01-21 14:40:41
+ * @LastEditTime : 2020-02-07 19:43:35
  -->
 <template>
     <el-table
@@ -10,14 +10,14 @@
         style="width:80%"
         stripe>
         <el-table-column
-            prop="bookDate"
-            column-key="bookDate"
+            prop="date"
+            column-key="date"
             sortable
             label="预约时间"
             align="center">
         </el-table-column>
         <el-table-column
-            prop="doctor"
+            prop="doctorName"
             label="医生"
             width="100"
             align="center">
@@ -28,7 +28,7 @@
             align="center">
         </el-table-column>
         <el-table-column
-            prop="mobile"
+            prop="phone"
             label="手机号"
             align="center">
         </el-table-column>
@@ -59,49 +59,28 @@
 </template>
 
 <script>
+import { getRecord } from '@/api/appoint'
+import moment from 'moment';
 export default {
     name: 'List',
     data() {
         return {
-            tableData: [{
-                    userName: '王小虎',
-                    gender: '男',
-                    doctor: '张全',
-                    bookDate: '2020-1-20',
-                    mobile: '13242270901',
-                    reason: '肚子痛',
-                    status: '正在进行',
-                },
-                {
-                    userName: '王二虎',
-                    gender: '女',
-                    doctor: '李冰',
-                    bookDate: '2020-1-19',
-                    mobile: '13242270901',
-                    reason: '肚子痛',
-                    status: '已完成',
-                },
-                {
-                    userName: '王二虎',
-                    gender: '女',
-                    doctor: '王太利',
-                    bookDate: '2020-1-29',
-                    mobile: '13242270901',
-                    reason: '肚子痛',
-                    status: '已完成',
-                },
-                {
-                    userName: '王二虎',
-                    gender: '女',
-                    doctor: '刘德华',
-                    bookDate: '2020-1-28',
-                    mobile: '13242270901',
-                    reason: '肚子痛',
-                    status: '待看诊',
-                },
-            ]
+            tableData: []
 
         }
+    },
+    created(){
+      getRecord().then(res=>{
+        console.log(res)
+        if(res.status){
+          res.data.map(item=>{
+            item.date = moment(item.date).format('YYYY-MM-DD hh:mm:ss')
+          })
+          this.tableData = res.data
+        }else{
+          this.$message.error('获取记录失败')
+        }
+      })
     },
     methods: {
         look() {

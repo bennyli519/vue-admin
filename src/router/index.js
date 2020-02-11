@@ -172,19 +172,20 @@ export const asyncRoutes = [
     name: 'appoint',
     meta: {
       title: '预约管理',
-      icon: 'nested'
+      icon: 'nested',
+      roles: ['patient', 'admin']
     },
     children: [
       {
         path: 'book',
         component: () => import('@/views/patient/appoint/book/index'), // Parent router-view
-        name: 'book',
-        meta: { title: '预约挂号', roles: ['patient', 'admin'] }
+        name: 'book'
+        // meta: { title: '预约挂号', roles: ['patient', 'admin'] }
       },
       {
         path: 'list',
-        component: () => import('@/views/patient/appoint/list/index'),
-        meta: { title: '看诊记录', roles: ['admin', 'patient', 'doctor'] }
+        component: () => import('@/views/patient/appoint/list/index')
+        // meta: { title: '看诊记录', roles: ['admin', 'patient'] }
       }
     ]
   },
@@ -223,9 +224,9 @@ export const asyncRoutes = [
         path: 'plist',
         name: 'Form',
         component: () => import('@/views/doctor/plist'),
-        meta: { title: '患者信息列表'}
-      },
-      
+        meta: { title: '患者信息列表' }
+      }
+
     ]
   },
   {

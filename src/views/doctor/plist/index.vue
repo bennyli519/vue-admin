@@ -2,7 +2,7 @@
  * @Description: 患者信息列表
  * @Author: Benny
  * @Date: 2020-01-20 11:08:51
- * @LastEditTime : 2020-01-20 17:29:41
+ * @LastEditTime : 2020-02-11 20:26:14
  -->
 <template>
     <div>
@@ -21,15 +21,17 @@
             </div>
         </div>
         <el-table :data="tableData"  style="width:60%" stripe >
+             <el-table-column prop="userId" label="用户id" align="center">
+            </el-table-column>
             <el-table-column prop="userName" label="用户名" align="center">
             </el-table-column>
             <el-table-column prop="gender" label="用户性别" width="100" align="center">
             </el-table-column>
-            <el-table-column prop="office" label="科室" align="center">
-            </el-table-column>
             <el-table-column prop="age" label="年龄" width="100" align="center">
             </el-table-column>
-            <el-table-column prop="mobile" label="手机号" align="center">
+            <el-table-column prop="phone" label="手机号" align="center">
+            </el-table-column>
+               <el-table-column prop="address" label="家庭地址" align="center">
             </el-table-column>
         </el-table>
     </div>
@@ -50,6 +52,7 @@
     }
 </style>
 <script>
+import { getPatientList } from '@/api/doctor'
 export default {
     name: 'List',
     data() {
@@ -73,6 +76,13 @@ export default {
             ]
 
         }
+    },
+    created() {
+      getPatientList().then(res=>{
+        if(res.status)
+          this.tableData = res.data
+        console.log(res)
+      })
     },
     methods:{
 

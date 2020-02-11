@@ -2,7 +2,7 @@
  * @Description: 看诊(病人信息，病历录入)
  * @Author: Benny
  * @Date: 2020-01-20 11:08:51
- * @LastEditTime : 2020-01-20 17:16:47
+ * @LastEditTime : 2020-02-11 21:14:18
  -->
 <template>
     <el-form
@@ -44,7 +44,7 @@
             <el-input
                 type="textarea"
                 :rows="4"
-                v-model="ruleForm.reason"
+                v-model="ruleForm.suggest"
                 placeholder="建议"></el-input>
         </el-form-item>
           <el-form-item label="处方">
@@ -54,10 +54,10 @@
                 v-model="ruleForm.medicine"
                 placeholder="处方"></el-input>
         </el-form-item>
-       
+
 
         <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+            <el-button :loading="isLoading" type="primary" @click="submitForm('ruleForm')">提交</el-button>
         </el-form-item>
     </el-form>
 </template>
@@ -69,18 +69,21 @@
 </style>
 
 <script>
+import { submitCase } from '@/api/doctor'
 export default {
     name: 'Add',
     data() {
         return {
-            value1: '',
+            isLoading:false,
             ruleForm: {
-                name: '',
-                gender: '',
-                age: '',
+                name: this.$route.query.name,
+                gender:this.$route.query.gender,
+                age: this.$route.query.age,
                 content: '',
                 conclude: '',
-                reason:''
+                suggest:'',
+                medicine:'',
+                patientId:this.$route.query.patientId
             },
             rules: {
                 name: [{
@@ -91,14 +94,24 @@ export default {
             }
         };
     },
-
+  created() {
+    console.log(this.ruleForm)
+  },
     methods: {
         submitForm(formName) {
             this.$refs[formName].validate(valid => {
-                if (valid) {
-                    console.log(this.ruleForm)
-                    alert("submit!");
+              if (valid) {
+              this.isLoading = true
+                    submitCase(this.ruleForm).then(res=>{
+                      this.isLoading = false
+                      console.log(res)
+                      if(res.status)
+                        this.$message.success('提交成功')
+                      else
+                        this.$message.error('提交失败')
+                    })
                 } else {
+                      this.isLoading = false
                     console.log("error submit!!");
                     return false;
                 }

@@ -2,7 +2,7 @@
  * @Description: 看诊(病人信息，病历录入)
  * @Author: Benny
  * @Date: 2020-01-20 11:08:51
- * @LastEditTime : 2020-02-11 21:14:18
+ * @LastEditTime : 2020-02-11 21:49:34
  -->
 <template>
     <el-form
@@ -83,7 +83,8 @@ export default {
                 conclude: '',
                 suggest:'',
                 medicine:'',
-                patientId:this.$route.query.patientId
+                patientId:this.$route.query.patientId,
+                appointId:this.$route.query.appointId,
             },
             rules: {
                 name: [{
@@ -105,8 +106,10 @@ export default {
                     submitCase(this.ruleForm).then(res=>{
                       this.isLoading = false
                       console.log(res)
-                      if(res.status)
+                      if(res.status){
                         this.$message.success('提交成功')
+                        this.$router.push('/doctor/cureList')
+                      }
                       else
                         this.$message.error('提交失败')
                     })

@@ -2,7 +2,7 @@
  * @Author: Benny
  * @Date: 2020-01-11 14:36:02
  * @Description  : 待看诊列表
- * @LastEditTime : 2020-02-11 20:45:02
+ * @LastEditTime : 2020-02-11 21:35:15
  -->
 <template>
     <el-table :data="tableData"  style="width:60%" stripe >
@@ -66,7 +66,8 @@ export default {
                 patientId:row.patientId,
                 name:row.userName,
                 age:row.age,
-                gender:row.gender
+                gender:row.gender,
+                appointId:row.appointId,
               }
             })
         }

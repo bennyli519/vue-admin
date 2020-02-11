@@ -179,13 +179,12 @@ export const asyncRoutes = [
       {
         path: 'book',
         component: () => import('@/views/patient/appoint/book/index'), // Parent router-view
-        name: 'book'
-        // meta: { title: '预约挂号', roles: ['patient', 'admin'] }
+        meta: { title: '预约挂号', roles: ['patient', 'admin'] }
       },
       {
         path: 'list',
-        component: () => import('@/views/patient/appoint/list/index')
-        // meta: { title: '看诊记录', roles: ['admin', 'patient'] }
+        component: () => import('@/views/patient/appoint/list/index'),
+        meta: { title: '看诊记录', roles: ['admin', 'patient'] }
       }
     ]
   },

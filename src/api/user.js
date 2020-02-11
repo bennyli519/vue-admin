@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-01-11 02:12:48
- * @LastEditTime : 2020-01-31 14:01:07
+ * @LastEditTime : 2020-02-12 01:11:03
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-admin-template\src\api\user.js
@@ -35,13 +35,13 @@ export function getInfo(token) {
 export function getInfoList() {
   return request({
     url: '/user/infoList',
-    method: 'get',
+    method: 'get'
   })
 }
 
 export function logout() {
   return request({
-    url: '/vue-admin-template/user/logout',
+    url: '/user/logout',
     method: 'post'
   })
 }

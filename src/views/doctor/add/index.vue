@@ -2,7 +2,7 @@
  * @Description: 看诊(病人信息，病历录入)
  * @Author: Benny
  * @Date: 2020-01-20 11:08:51
- * @LastEditTime : 2020-02-11 21:49:34
+ * @LastEditTime : 2020-02-11 22:54:58
  -->
 <template>
     <el-form

@@ -2,7 +2,7 @@
  * @Author: Benny
  * @Date: 2020-01-11 14:34:46
  * @LastEditors  : Please set LastEditors
- * @LastEditTime : 2020-01-21 14:00:13
+ * @LastEditTime : 2020-02-12 14:25:24
  -->
 <template>
     <el-table :data="tableData"  style="width:80%" stripe >
@@ -26,7 +26,7 @@
         </el-table-column>
          <el-table-column prop="caseCure" label="处方" align="center">
         </el-table-column>
-     
+
     </el-table>
 
 </template>
@@ -34,6 +34,8 @@
 
 
 <script>
+import { getCasetList } from '@/api/doctor'
+import moment from 'moment';
 export default {
     name: 'caseList',
     data() {
@@ -65,6 +67,18 @@ export default {
             ]
 
         }
+    },
+    created() {
+      getCasetList().then(res=>{
+        if(res.status){
+           res.data.map(item=>{
+            item.caseDate = moment(item.caseDate).format('YYYY-MM-DD hh:mm:ss')
+          })
+          this.tableData = res.data
+        }else{
+          this.$message.error('获取记录失败')
+        }
+      })
     },
     methods:{
 

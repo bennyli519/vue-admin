@@ -2,7 +2,7 @@
  * @Author: Benny
  * @Date: 2020-02-11 16:14:30
  * @Description:
- * @LastEditTime : 2020-02-11 16:37:02
+ * @LastEditTime : 2020-02-12 13:49:09
  */
 
 import request from '@/utils/request'
@@ -35,9 +35,18 @@ export function getDoctorList(params) {
 }
 
 // 获取医生名下病人
-export function getPatientList(params) {
+export function getPatientList(data) {
   return request({
     url: '/doctor/getPatientList',
+    method: 'post',
+    data
+  })
+}
+
+// 获取所有病历
+export function getCasetList(params) {
+  return request({
+    url: '/doctor/getCaseList',
     method: 'get',
     params
   })

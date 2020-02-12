@@ -204,7 +204,7 @@ export const asyncRoutes = [
         path: 'cureList',
         component: () => import('@/views/doctor/curelist/index'), // Parent router-view
         name: 'cure',
-        meta: { title: '待看诊列表' }
+        meta: { title: '待看诊列表', roles: ['doctor'] }
       },
       {
         path: 'add',
@@ -217,13 +217,13 @@ export const asyncRoutes = [
         path: 'dlist',
         name: 'Form',
         component: () => import('@/views/doctor/dlist'),
-        meta: { title: '医生信息列表' }
+        meta: { title: '医生信息列表', roles: ['admin', 'doctor'] }
       },
       {
         path: 'plist',
         name: 'Form',
         component: () => import('@/views/doctor/plist'),
-        meta: { title: '患者信息列表' }
+        meta: { title: '患者信息列表', roles: ['admin', 'doctor'] }
       }
 
     ]

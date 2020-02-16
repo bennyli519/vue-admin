@@ -145,7 +145,7 @@ const accountRouter = [
  */
 export const asyncRoutes = [
   ...officeRouter,
-  ...drugRouter,
+  // ...drugRouter,
 
   {
     path: '/case',
@@ -162,6 +162,13 @@ export const asyncRoutes = [
         path: 'list',
         component: () => import('@/views/patient/case/list/index'),
         meta: { title: '病历汇总' }
+      },
+      {
+        path: 'detail',
+        component: () => import('@/views/patient/case/detail/index'), // Parent router-view
+        name: 'add',
+        meta: { title: '我的病历' },
+        hidden: true
       }
     ]
   },

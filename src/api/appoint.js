@@ -2,7 +2,7 @@
  * @Author: Benny
  * @Date: 2020-02-07 13:41:05
  * @Descrition: 预约接口
- * @LastEditTime : 2020-02-07 13:44:12
+ * @LastEditTime : 2020-02-16 14:57:18
  */
 import request from '@/utils/request'
 
@@ -33,3 +33,29 @@ export function getDoctor(data) {
   })
 }
 
+// 获取药品
+export function getMedicine(data) {
+  return request({
+    url: '/appoint/getMedicine',
+    method: 'post',
+    data
+  })
+}
+
+// 获取病历
+export function getCase(data) {
+  return request({
+    url: '/appoint/getCase',
+    method: 'post',
+    data
+  })
+}
+
+// 修改状态
+export function updateStatus(data) {
+  return request({
+    url: '/appoint/updateStatus',
+    method: 'post',
+    data
+  })
+}
